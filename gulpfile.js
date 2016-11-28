@@ -1,29 +1,66 @@
 "use strict";
 
-// переменные (модули)
-var gulp        = require("gulp");
+// МОДУЛИ:
+
+// gulp
+var gulp = require("gulp");
+
+// сервер и обновление
 var browserSync = require("browser-sync").create();
-var sass        = require("gulp-sass");
-var useref = require("gulp-useref");
-var rename = require("gulp-rename");
-var plumber = require("gulp-plumber");
+var server = require("browser-sync");
+
+// *** сборка ***
+
+// sass
+var sass = require("gulp-sass");
+
+// префиксы для CSS
 var postcss = require("gulp-postcss");
 var autoprefixer = require("autoprefixer");
-var server = require("browser-sync");
+
+// useref - парсит специфичные блоки и конкатенирует описанные в них стили и скрипты
+var useref = require("gulp-useref");
+
+// mqpacker - группирует media queries и перемещает их
 var mqpacker = require("css-mqpacker");
+
+// minify - минификация CSS
 var minify = require("gulp-csso");
+
+// imagemin - сжатие изображений
 var imagemin = require("gulp-imagemin");
-var gulpif = require("gulp-if");
-var ftp = require("gulp-ftp"); // если неободимо sftp соединение - заменить gulp-ftp на gulp-sftp(см. package.json)
+
+// *** общие ***
+
+// gulp-util - вспомогательные утилиты gulp
 var gutil = require('gulp-util');
 
-var del = require("del");
+//  rename - переименовывает файлы
+var rename = require("gulp-rename");
+
+// plumber - обрабатывает ошибки и выводит в консоль
+var plumber = require("gulp-plumber");
+
+// позволяет запускать несколько задач
+var gulpif = require("gulp-if");
+
+// позволяет запускать задачи последовательно
 var run = require('run-sequence');
+
+// notify - позволяет выводить системные сообщения
+var notify = require("gulp-notify");
+
+// заливает сборку по FTP
+var ftp = require("gulp-ftp"); 
+
+// очищает каталог
+var del = require("del");
+
+// работа с файловой системой
 var fs = require('fs');
 
-//команды
-gulp.task("default", ["serve"]);
 
+// ЗАДАЧИ:
 
 // сборка стилей
 gulp.task("sass", function() {
@@ -61,12 +98,15 @@ gulp.task("serve", ["sass"], function() {
     gulp.watch("app/*.html").on("change", browserSync.reload);
 });
 
-// очистка
+//команда по умолчанию - запуск сервера и наблюдение
+gulp.task("default", ["serve"]);
+
+// очистка каталога со сборкой
 gulp.task("clean", function() {
     return del("dist");
 });
 
-//useref
+//копирование файлов в каталог сборки
 gulp.task("copy", function() {
     gulp.src("app/*.html").pipe(gulp.dest("dist"));
     gulp.src("app/css/*.css").pipe(gulp.dest("dist/css"));
@@ -74,19 +114,25 @@ gulp.task("copy", function() {
 });
 
 
-// Отправка собранного проекта на хостинг - очищает папку dist,
-// собирает в нее проект по новой и отправляет на хостинг
+// FTP: Отправка собранного проекта на хостинг
 gulp.task('ftp', function () {
-    return gulp.src('dist/**/**')
-        .pipe(ftp({
-            host: 'burshtein.ru',
-            user: 'fenixx83_burshtein',
-            pass: 'burshte1n'
-        }))
-        // you need to have some kind of stream after gulp-ftp to make sure it's flushed 
-        // this can be a gulp plugin, gulp.dest, or any kind of stream 
-        // here we use a passthrough stream 
-        .pipe(gutil.noop());
+
+  // настройки FTP
+  var ftpObj = {
+          host: 'burshtein.ru',
+          user: 'fenixx83_burshtein',
+          pass: ''
+      };  
+
+  // чтение файла с паролем
+  ftpObj.pass = fs.readFileSync('psw.txt','utf8');
+
+  return gulp.src('dist/**/**')
+      .pipe(ftp(ftpObj))
+      // you need to have some kind of stream after gulp-ftp to make sure it's flushed 
+      // this can be a gulp plugin, gulp.dest, or any kind of stream 
+      // here we use a passthrough stream 
+      .pipe(gutil.noop());
 });
 
 // запуск сборки
