@@ -111,6 +111,7 @@ gulp.task("copy", function() {
     gulp.src("app/*.html").pipe(gulp.dest("dist"));
     gulp.src("app/css/*.css").pipe(gulp.dest("dist/css"));
     gulp.src("app/js/*.js").pipe(gulp.dest("dist/js"));
+    gulp.src("app/img/*.*").pipe(gulp.dest("dist/img"));
 });
 
 

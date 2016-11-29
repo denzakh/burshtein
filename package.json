@@ -8,7 +8,7 @@
     "start": "node_modules/.bin/gulp",
     "build": "gulp build",
     "ftp": "gulp ftp",
-    "psw": "gulp psw"
+    "copy": "gulp copy"
   },
   "repository": {
     "type": "git",
