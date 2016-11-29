@@ -2,5 +2,11 @@
 // Собственные значения переменных, заменяющие переменные `_variables.scss`
 
 * {
-	outline: 1px solid red;
+	// outline: 1px solid red;
 }
+
+
+$navbar-dark-color:                 rgba(255,255,255,.9) !default;
+$navbar-dark-hover-color:           rgba(255,255,255,.75) !default;
+$navbar-dark-active-color:          rgba(255,255,255,1) !default;
+$navbar-dark-disabled-color:        rgba(255,255,255,.25) !default;
