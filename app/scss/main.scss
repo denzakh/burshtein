@@ -1,0 +1,57 @@
+
+.display-3, 
+.display-4
+ {
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+
+
+/* паралакс */
+
+
+.paralax-block {
+  padding: 0px;
+  margin-bottom: 0px;
+  color: inherit;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+
+// SX.  image 600
+@media screen and (max-width: 574px) {
+  .paralax-block {
+    min-height: 100px; 
+  }
+  .paralax-block-1 {
+    background: url(../img/ikea-paralax-sx.jpg) no-repeat center center fixed; 
+  }
+}
+
+// MD (sm, md). image 1000
+@media screen and (min-width: 575px) and (max-width: 991px) {
+  .paralax-block {
+    min-height: 300px; 
+  }
+  .paralax-block-1 {
+    background: url(../img/ikea-paralax-md.jpg) no-repeat center center fixed; 
+  }
+}
+
+
+// LG (lg, xl). image 2500
+@media screen and (min-width: 992px) {
+  .paralax-block {
+    min-height: 300px; 
+  }
+  .paralax-block-1 {
+    background: url(../img/ikea-paralax-lg.jpg) no-repeat center center fixed; 
+  }
+}
