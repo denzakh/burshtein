@@ -13,22 +13,29 @@
 
 
 .paralax-block {
-  padding: 0px;
-  margin-bottom: 0px;
+  position: relative;
   color: inherit;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  color: #ffffff;
+  text-shadow: 0px 0px 2px rgba(0,0,0,0.9);
+  font-weight: bold;
+
+}
+
+.paralax-block  .container {
+  // position: absolute;
+  // left: 50%;
+  // transform: translate(-50%, 50%);
 }
 
 
 // SX.  image 600
 @media screen and (max-width: 574px) {
   .paralax-block {
-    min-height: 100px; 
+    min-height: 200px; 
   }
   .paralax-block-1 {
     background: url(../img/ikea-paralax-sx.jpg) no-repeat center center fixed; 
@@ -40,6 +47,11 @@
   .paralax-block {
     min-height: 300px; 
   }
+  .paralax-block .container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
   .paralax-block-1 {
     background: url(../img/ikea-paralax-md.jpg) no-repeat center center fixed; 
   }
@@ -50,6 +62,11 @@
 @media screen and (min-width: 992px) {
   .paralax-block {
     min-height: 300px; 
+  }
+  .paralax-block .container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
   }
   .paralax-block-1 {
     background: url(../img/ikea-paralax-lg.jpg) no-repeat center center fixed; 
